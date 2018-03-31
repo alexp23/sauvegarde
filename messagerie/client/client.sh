@@ -8,6 +8,11 @@ serverDest="/home/Alex/$messagerie"
 
 msgBefore=""
 
+if [ ! -f $messagerie ]
+then
+  echo " " >> $messagerie
+fi
+
 <<COMMENT 
 while [ 1 ]
 do
@@ -29,6 +34,7 @@ done
 COMMENT
 
 i=0
+
 nbLine=`wc -l $messagerie | cut -d ' ' -f 1`
 
 while [ $i -lt $nbLine ]
