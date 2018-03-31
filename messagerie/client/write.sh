@@ -27,9 +27,7 @@ else
   pseudo=$2
 fi
 
-echo "_______________________" >> $messagerie
 echo "| $pseudo est en ligne |>" >> $messagerie
-echo "-----------------------" >> $messagerie
 
 while [ 1 ]
 do
@@ -38,17 +36,14 @@ do
 
   if  [ "$msg" = "$cQuit" ]
   then
-    echo "_________________________"  >> $messagerie
     echo "| $pseudo est hors ligne |>">> $messagerie
-    echo "-------------------------"  >> $messagerie
     exit
   elif [ "$msg" = "$cKill" ]
   then
     rm $messagerie
     exit
   fi
-  echo "$pseudo : $msg" >> $messagerie
-  echo "------------------------------------------------------>" >> $messagerie
+  echo "| $pseudo : $msg |>" >> $messagerie
 
 done
 

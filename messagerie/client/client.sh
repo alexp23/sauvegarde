@@ -52,11 +52,16 @@ do
   i=$(($i+1))
 
   line=`sed -n "$i p" $messagerie`
-  echo "$line"
+  echo "$i : $line"
   
   while [ $nbLine -eq $i ]
   do
-    nbLine=`wc -l $messagerie | cut -d ' ' -f 1`
+    if [ -f $messagerie ]
+    then
+      nbLine=`wc -l $messagerie | cut -d ' ' -f 1`
+    else
+      exit
+    fi
     sleep 1
   done
 
