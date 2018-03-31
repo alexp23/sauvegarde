@@ -3,6 +3,11 @@
 cQuit=":exit"             #commande pour quitter le programme
 cKill=":exit kill"        #commande pour supprimer la conversation
 
+serverName=""
+serverIP=""
+serverPort=""
+
+
 if [ -z $1 ]
 then
   read -p "entrez le fichier : " messagerie
@@ -27,7 +32,21 @@ else
   pseudo=$2
 fi
 
-echo "| $pseudo est en ligne |>" >> $messagerie
+if [ ! -f $messagerie$pseudo ]
+then
+  echo "$messagerie" >> $messagerie$pseudo
+  echo "$pseudo" >> $messagerie$pseudo
+fi
+
+sendMessage()
+{
+  echo $1 >> $2
+  cat $2 >> $messagerie
+  rm $2
+  #scp $2 "USR@IP:PORT/home/USR/"
+}
+
+sendMessage "| $pseudo est en ligne |>" $messagerie$pseudo
 
 while [ 1 ]
 do
@@ -36,14 +55,14 @@ do
 
   if  [ "$msg" = "$cQuit" ]
   then
-    echo "| $pseudo est hors ligne |>">> $messagerie
+    sendMessage "| $pseudo est hors ligne |>" $messagerie$pseudo
     exit
   elif [ "$msg" = "$cKill" ]
   then
-    rm $messagerie
+    rm $messagerie$pseudo
     exit
   fi
-  echo "| $pseudo : $msg |>" >> $messagerie
+  sendMessage "| $pseudo : $msg |>" $messagerie$pseudo
 
 done
 

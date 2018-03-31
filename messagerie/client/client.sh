@@ -42,27 +42,30 @@ do
 done
 COMMENT
 
-i=0
-
 nbLine=`wc -l $messagerie | cut -d ' ' -f 1`
 
-while [ $i -lt $nbLine ]
+cat -n $messagerie
+echo "---------------messages enregistre---------------"
+
+i=$nbLine
+lastLine=$nbLine
+
+while [ $i -le $nbLine ]
 do
-  
-  i=$(($i+1))
 
   line=`sed -n "$i p" $messagerie`
-  echo "$i : $line"
-  
+
+  if [ $nbLine -ne $lastLine ]
+  then
+    echo "$i : $line"
+  fi
+
   while [ $nbLine -eq $i ]
   do
-    if [ -f $messagerie ]
-    then
-      nbLine=`wc -l $messagerie | cut -d ' ' -f 1`
-    else
-      exit
-    fi
+    nbLine=`wc -l $messagerie | cut -d ' ' -f 1`
     sleep 1
   done
+
+  i=$(($i+1))
 
 done
