@@ -34,19 +34,19 @@ fi
 
 if [ ! -f $messagerie$pseudo ]
 then
-  echo "$messagerie" >> $messagerie$pseudo
-  echo "$pseudo" >> $messagerie$pseudo
+  echo "$messagerie" >> "$messagerie|$pseudo"
+  echo "$pseudo" >> "$messagerie|$pseudo"
 fi
 
 sendMessage()
 {
   echo $1 >> $2
-  cat $2 >> $messagerie
+  cp "$2" "../server"
   rm $2
   #scp $2 "USR@IP:PORT/home/USR/"
 }
 
-sendMessage "| $pseudo est en ligne |>" $messagerie$pseudo
+sendMessage "| $pseudo est en ligne |>" "$messagerie|$pseudo"
 
 while [ 1 ]
 do
@@ -55,14 +55,10 @@ do
 
   if  [ "$msg" = "$cQuit" ]
   then
-    sendMessage "| $pseudo est hors ligne |>" $messagerie$pseudo
-    exit
-  elif [ "$msg" = "$cKill" ]
-  then
-    rm $messagerie$pseudo
+    sendMessage "| $pseudo est hors ligne |>" "$messagerie|$pseudo"
     exit
   fi
-  sendMessage "| $pseudo : $msg |>" $messagerie$pseudo
+  sendMessage "| $pseudo : $msg |>" "$messagerie|$pseudo"
 
 done
 
