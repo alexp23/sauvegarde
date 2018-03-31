@@ -48,6 +48,7 @@ do
   while [ $nbLine -eq $i ]
   do
     nbLine=`wc -l $messagerie | cut -d ' ' -f 1`
+    sleep 1
   done
 
 done
