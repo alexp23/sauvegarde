@@ -1,12 +1,21 @@
 #!/bin/bash
 
-read -p "entrez le fichier : " messagerie
 serverName="Messagerie"
 serverIp="192.168.1.75"
 serverPort="22"
 serverDest="/home/Alex/$messagerie"
 
-msgBefore=""
+if [ -z $1 ]
+then
+  read -p "entrez le fichier : " messagerie
+  
+  while [ -z $messagerie ]
+  do
+    read -p "entrez le fichier : " messagerie
+  done
+else
+  messagerie=$1
+fi
 
 if [ ! -f $messagerie ]
 then
