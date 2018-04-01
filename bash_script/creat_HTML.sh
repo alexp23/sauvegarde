@@ -7,6 +7,7 @@ else
   file=$1
 fi
 
+<<COMMENT
 if [ ! -z $2 ]
 then
   if [ -d $2 ]
@@ -17,7 +18,7 @@ then
     cd $2
   fi
 fi
-  
+COMMENT
 
 if [ -f $file ]
 then
@@ -29,12 +30,11 @@ echo "<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>$3</title>
+    <title>$2</title>
   </head>
   <body>
   " >> $file
-echo  "<h1>$3</h1>" >>$file
-echo  "<p>$4</p>" >>$file
-echo "</body>
-</html>" >> $file
+echo  "<h1>$2</h1>" >>$file
+echo  "<p>$3</p>" >>$file
+echo "</body></html>" >> $file
 
