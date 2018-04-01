@@ -3,10 +3,10 @@
 cQuit=":exit"             #commande pour quitter le programme
 cKill=":exit kill"        #commande pour supprimer la conversation
 
-serverName=""
-serverIP=""
-serverPort=""
-
+name="USR"
+ip="192.168.1.75"
+port="22"
+dest=""
 
 if [ -z $1 ]
 then
@@ -42,7 +42,7 @@ sendMessage()
 {
   echo $1 > $2
   cp "$2" "../server"
-  #scp $2 "USR@IP:PORT/home/USR/"
+  #scp $2 "$name@$ip:$port$dest"
 }
 
 sendMessage "| $pseudo est en ligne |>" "$messagerie|$pseudo"
