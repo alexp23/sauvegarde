@@ -29,12 +29,12 @@ echo "<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Titre</title>
+    <title>$3</title>
   </head>
   <body>
   " >> $file
 echo  "<h1>$3</h1>" >>$file
-echo  "<p>$4</p>">>$file
+echo  "<p>$4</p>" >>$file
 echo "</body>
 </html>" >> $file
 
