@@ -7,14 +7,17 @@ do
 
   for file in `ls`
   do
-    if [ -f $file ]
+    if [ -f "$file" ] && [ "$file" != "server.sh" ]
     then
-      messagerie=`ls $file | cut -d '|' -f 1`
-      if [ ! -d $messagerie ]
+      messagerie="`ls $file | cut -d '|' -f 1`"
+
+      if [ ! -d "$messagerie" ]
       then
-        mkdir $messagerie
+        mkdir "$messagerie"
       fi
-        echo $file >> "$messagerie/$messagerie"
+
+      cat "$file" >> "$messagerie/$messagerie"
+      rm "$file"
     fi
   done
 

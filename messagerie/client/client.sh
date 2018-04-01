@@ -17,10 +17,14 @@ else
   messagerie=$1
 fi
 
-if [ ! -f $messagerie ]
+
+if [ ! -d "../server/$messagerie" ]
 then
-  echo " " >> $messagerie
+  mkdir "../server/$messagerie"
+  echo " " >> "../server/$messagerie/$messagerie"
 fi
+
+messagerie="../server/$messagerie/$messagerie"
 
 <<COMMENT 
 while [ 1 ]
@@ -55,10 +59,7 @@ do
 
   line=`sed -n "$i p" $messagerie`
 
-  if [ $nbLine -ne $lastLine ]
-  then
-    echo "$i : $line"
-  fi
+  echo "$i : $line"
 
   while [ $nbLine -eq $i ]
   do
