@@ -40,9 +40,8 @@ fi
 
 sendMessage()
 {
-  echo $1 >> $2
+  echo $1 > $2
   cp "$2" "../server"
-  rm $2
   #scp $2 "USR@IP:PORT/home/USR/"
 }
 
